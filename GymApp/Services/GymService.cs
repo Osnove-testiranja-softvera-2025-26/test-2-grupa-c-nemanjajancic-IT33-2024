@@ -1,6 +1,7 @@
 ﻿
 
 using GymApp.Exceptions;
+using GymApp.Fakes;
 using GymApp.Models;
 using System.Collections.Generic;
 
@@ -11,6 +12,25 @@ namespace GymApp.Services
         private readonly IPaymentService _paymentService;
         private readonly ITrainingService _trainingService;
         private readonly ITrainerPerformanceService _trainerPerformanceService;
+
+        public GymService()
+        {
+        }
+
+        public GymService(ITrainingService subTrainingService, ITrainerPerformanceService subPerformanceService, IPaymentService subPaymentService)
+        {
+        }
+
+        public GymService(FTS fakeTrainingService, FTPS fakePerformanceService, FPS fakePaymentService)
+        {
+            FakeTrainingService = fakeTrainingService;
+            FakePerformanceService = fakePerformanceService;
+            FakePaymentService = fakePaymentService;
+        }
+
+        public FTS FakeTrainingService { get; }
+        public FTPS FakePerformanceService { get; }
+        public FPS FakePaymentService { get; }
 
         public void DoStaffBonusPaymentCalculation(Trainer trainer)
         {

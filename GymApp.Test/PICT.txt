@@ -1,0 +1,12 @@
+﻿trainingTime: WholeDay, OnlyMorning, OnlyNight
+numberOfMonths: 4, 5, 12, 13, 15
+groupTrainings: true, false
+monthlyPriceBudget: 15, 16, 20, 21
+membershipType: TypeA, TypeB, TypeC, TypeD, null
+ 
+IF [trainingTime] = "OnlyNight" THEN [membershipType] = "TypeD";
+IF [trainingTime] = "WholeDay" AND [numberOfMonths] >= 5 AND [monthlyPriceBudget] > 20 AND [groupTrainings] = "false" THEN [membershipType] = "TypeB";
+IF [trainingTime] = "WholeDay" AND [numberOfMonths] >= 5 AND [monthlyPriceBudget] > 20 AND [groupTrainings] = "true" THEN [membershipType] = "TypeA";
+IF [trainingTime] = "WholeDay" AND ([monthlyPriceBudget] <= 20 OR [numberOfMonths] < 5) THEN [membershipType] = "null";
+IF [trainingTime] = "OnlyMorning" AND ([monthlyPriceBudget] > 15 OR [numberOfMonths] > 12) THEN [membershipType] = "TypeC";
+IF [trainingTime] = "OnlyMorning" AND [numberOfMonths] <= 13 AND [monthlyPriceBudget] < 16 THEN [membershipType] = "null";
